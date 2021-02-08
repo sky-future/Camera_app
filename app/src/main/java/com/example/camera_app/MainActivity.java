@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //Récupère l'ID d'un des boutons sélectionné sur l'interface de login.
         switch (v.getId()){
             case R.id.register:
-                startActivity(new Intent(this, RegisterUser.class));
+                startActivity(new Intent(this, RegisterUserActivity.class));
                 break;
 
         }

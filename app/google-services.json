@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "8057084522",
+    "project_id": "authentification-app-camera",
+    "storage_bucket": "authentification-app-camera.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:8057084522:android:f06bd5da6058f5e62f0813",
+        "android_client_info": {
+          "package_name": "com.example.camera_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "8057084522-87l6dus03s2lr5mcaipng3s1em2bqqd6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBnJZfd-yOinaBVlj-Mn7qhfj_w9FjOyqs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "8057084522-87l6dus03s2lr5mcaipng3s1em2bqqd6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
