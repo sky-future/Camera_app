@@ -1,15 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item
-        android:id="@+id/menuAbout"
-        android:title="About"
-        android:icon="@drawable/ic_about"
-        app:showAsAction="ifRoom"/>
-    <item
-        android:id="@+id/menuSettings"
-        android:icon="@drawable/ic_settings"
-        android:title="@string/settings"
-        app:showAsAction="ifRoom"
-        />
+<!--    Un seul élément peut être sélectionné à la fois-->
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/home_icon"
+            android:title="Home" />
+
+        <item
+            android:id="@+id/nav_add"
+            android:icon="@drawable/ic_add"
+            android:title="Add Camera"
+            />
+
+
+    </group>
+
+    <item android:title="Profile">
+
+        <menu>
+
+            <group android:checkableBehavior="single">
+
+                <item
+                    android:id="@+id/nav_profile"
+                    android:icon="@drawable/profile_icon"
+                    android:title="Profile" />
+
+                <item
+                    android:id="@+id/nav_logout"
+                    android:icon="@drawable/logout_icon"
+                    android:title="Logout" />
+            </group>
+        </menu>
+    </item>
 </menu>
