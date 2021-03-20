@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="addCameraIp" type="id" />
+    <item name="switch_addButtons" type="id" />
+    <item name="switch_addButtons2" type="id" />
+    <item name="switch_addButtons3" type="id" />
+    <item name="switch_addButtons4" type="id" />
+    <item name="switch_addButtons5" type="id" />
+    <item name="gpio13Name" type="id" />
+    <item name="gpio12Name" type="id" />
+    <item name="gpio14Name" type="id" />
+    <item name="gpio15Name" type="id" />
+    <item name="gpio16Name" type="id" />
+</resources>

@@ -37,18 +37,18 @@ public class RegisterUserActivity extends AppCompatActivity implements View.OnCl
 
         mAuth = FirebaseAuth.getInstance();
 
-        banner = (TextView) findViewById(R.id.banner);
+        banner = findViewById(R.id.banner);
         banner.setOnClickListener(this);
 
         registerUser = (Button) findViewById(R.id.registerButton);
         registerUser.setOnClickListener(this);
 
-        editTextFirstName = (EditText) findViewById(R.id.firstName);
-        editTextLastName = (EditText) findViewById(R.id.lastName);
-        editTextEmail = (EditText) findViewById(R.id.registerEmail);
-        editTextPassword = (EditText) findViewById(R.id.registerPassword);
+        editTextFirstName = findViewById(R.id.firstName);
+        editTextLastName = findViewById(R.id.lastName);
+        editTextEmail = findViewById(R.id.registerEmail);
+        editTextPassword = findViewById(R.id.registerPassword);
 
-        progressBarRegister = (ProgressBar) findViewById(R.id.progressBarRegister);
+        progressBarRegister = findViewById(R.id.progressBarRegister);
 
         editTextFirstName.setText("jordan");
         editTextLastName.setText("quicken");

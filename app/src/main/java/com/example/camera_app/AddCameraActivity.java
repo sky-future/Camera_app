@@ -1,5 +1,6 @@
 package com.example.camera_app;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -21,19 +22,19 @@ import java.util.regex.Pattern;
 
 import model.Camera;
 
-public class AddCameraActivity extends AppCompatActivity implements CompoundButton.OnCheckedChangeListener, View.OnClickListener {
+public class AddCameraActivity extends AppCompatActivity   {
 
     private EditText ipCamera;
     
     private Switch switchGpio12, switchGpio13, switchGpio14, switchGpio15, switchGpio16;
-  
-    private Button addCameraSaveButton;
-    
+
     private EditText nameGpio12;
     private EditText nameGpio13;
     private EditText nameGpio14;
     private EditText nameGpio15;
     private EditText nameGpio16;
+
+    private Button addCameraSaveButton;
     
 
     private static final Pattern IP_ADDRESS
@@ -49,7 +50,7 @@ public class AddCameraActivity extends AppCompatActivity implements CompoundButt
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_camera);
 
-        ipCamera = (EditText)findViewById(R.id.addCameraIp);
+        ipCamera = findViewById(R.id.addCameraIp);
 
         Switch switchGpio12 = (Switch) findViewById(R.id.switch_addButtons);
         Switch switchGpio13 = (Switch) findViewById(R.id.switch_addButtons2);
@@ -61,9 +62,13 @@ public class AddCameraActivity extends AppCompatActivity implements CompoundButt
         addCameraSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(AddCameraActivity.this, "la camera a bien été ajouté", Toast.LENGTH_LONG).show();
                 addCameratoUser();
+               // ipCamera.setText("test");
+               // startActivity(new Intent(AddCameraActivity.this, CameraGridActivity.class));
             }
         });
+
 
         nameGpio12 = (EditText) findViewById(R.id.gpio12Name);
         nameGpio13 = (EditText) findViewById(R.id.gpio13Name);
@@ -87,6 +92,8 @@ public class AddCameraActivity extends AppCompatActivity implements CompoundButt
     }
 
     private void addCameratoUser() {
+
+        Toast.makeText(AddCameraActivity.this, "la camera a bien été ajouté", Toast.LENGTH_LONG).show();
 
         String ipCam = ipCamera.getText().toString().trim();
         Boolean gpio12 = switchGpio12.isChecked();
@@ -159,14 +166,21 @@ public class AddCameraActivity extends AppCompatActivity implements CompoundButt
     }
 
 
-    @Override
-    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        Toast.makeText(this, "The Switch is" + (isChecked ? "On" : "off"), Toast.LENGTH_SHORT).show();
-    }
+//    @Override
+//    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//        Toast.makeText(this, "The Switch is" + (isChecked ? "On" : "off"), Toast.LENGTH_SHORT).show();
+//    }
 
 
-    @Override
-    public void onClick(View v) {
-        addCameratoUser();
-    }
+//    @Override
+//    public void onClick(View v) {
+//        switch(v.getId()){
+//            case R.id.saveAddCameraButton:
+//                Toast.makeText(AddCameraActivity.this, "la camera a bien été ajouté", Toast.LENGTH_SHORT).show();
+//                //addCameratoUser();
+//                break;
+//
+//        }
+//
+//    }
 }

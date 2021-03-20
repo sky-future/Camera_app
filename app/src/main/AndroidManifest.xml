@@ -16,7 +16,9 @@
         <activity android:name=".ForgotPassword" />
         <activity android:name=".CameraGridActivity" />
         <activity android:name=".RegisterUserActivity" />
+        <activity android:name=".AddCameraActivity"/>
         <activity android:name=".MainActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

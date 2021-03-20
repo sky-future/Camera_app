@@ -89,7 +89,7 @@ public class CameraGridActivity extends AppCompatActivity implements NavigationV
                 Toast.makeText(CameraGridActivity.this, "Logout succesfull", Toast.LENGTH_LONG).show();
                 break;
             case R.id.nav_add:
-                startActivity(new Intent(CameraGridActivity.this, CameraViewActivity.class));
+                startActivity(new Intent(CameraGridActivity.this, AddCameraActivity.class));
                 break;
         }
         drawerLayout.closeDrawer(GravityCompat.START);//Ferme le menu quand un bouton est exécuté.
