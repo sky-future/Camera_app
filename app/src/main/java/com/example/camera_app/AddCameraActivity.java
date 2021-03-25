@@ -6,7 +6,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.Switch;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -14,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -22,11 +22,11 @@ import java.util.regex.Pattern;
 
 import model.Camera;
 
-public class AddCameraActivity extends AppCompatActivity   {
+public class AddCameraActivity extends AppCompatActivity implements {
 
     private EditText ipCamera;
     
-    private Switch switchGpio12, switchGpio13, switchGpio14, switchGpio15, switchGpio16;
+    private SwitchMaterial switchGpio12, switchGpio13, switchGpio14, switchGpio15, switchGpio16;
 
     private EditText nameGpio12;
     private EditText nameGpio13;
@@ -52,11 +52,11 @@ public class AddCameraActivity extends AppCompatActivity   {
 
         ipCamera = findViewById(R.id.addCameraIp);
 
-        Switch switchGpio12 = (Switch) findViewById(R.id.switch_addButtons);
-        Switch switchGpio13 = (Switch) findViewById(R.id.switch_addButtons2);
-        Switch switchGpio14 = (Switch) findViewById(R.id.switch_addButtons3);
-        Switch switchGpio15 = (Switch) findViewById(R.id.switch_addButtons4);
-        Switch switchGpio16 = (Switch) findViewById(R.id.switch_addButtons5);
+        SwitchMaterial switchGpio12 = findViewById(R.id.switch_addButtons);
+        SwitchMaterial switchGpio13 = findViewById(R.id.switch_addButtons2);
+        SwitchMaterial switchGpio14 = findViewById(R.id.switch_addButtons3);
+        SwitchMaterial switchGpio15 = findViewById(R.id.switch_addButtons4);
+        SwitchMaterial switchGpio16 = findViewById(R.id.switch_addButtons5);
 
         addCameraSaveButton = (Button) findViewById(R.id.saveAddCameraButton);
         addCameraSaveButton.setOnClickListener(new View.OnClickListener() {
@@ -79,13 +79,13 @@ public class AddCameraActivity extends AppCompatActivity   {
 
 
 
-//        if(switchGpio12 != null && switchGpio13 !=null && switchGpio14 !=null && switchGpio15 !=null &&switchGpio16 != null){
-//            switchGpio12.setOnCheckedChangeListener(this);
-//            switchGpio13.setOnCheckedChangeListener(this);
-//            switchGpio14.setOnCheckedChangeListener(this);
-//            switchGpio15.setOnCheckedChangeListener(this);
-//            switchGpio16.setOnCheckedChangeListener(this);
-//        }
+        if(switchGpio12 != null && switchGpio13 !=null && switchGpio14 !=null && switchGpio15 !=null &&switchGpio16 != null){
+            switchGpio12.setOnCheckedChangeListener(this);
+            switchGpio13.setOnCheckedChangeListener(this);
+            switchGpio14.setOnCheckedChangeListener(this);
+            switchGpio15.setOnCheckedChangeListener(this);
+            switchGpio16.setOnCheckedChangeListener(this);
+        }
 
 
 
