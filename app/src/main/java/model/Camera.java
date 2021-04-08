@@ -22,6 +22,9 @@ public class Camera {
         this.gpio16Name = gpio16Name;
     }
 
+    public Camera() {
+    }
+
     @Override
     public String toString() {
         return "Camera{" + ipCamera +

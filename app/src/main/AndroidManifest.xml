@@ -12,8 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Camera_app"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity_user_profile"></activity>
-        <activity android:name=".CameraViewActivity" />
+        <activity android:name=".CameraViewActivity"></activity>
+        <activity android:name=".testCamera" />
+        <activity android:name=".activity_user_profile" />
         <activity android:name=".ForgotPassword" />
         <activity android:name=".CameraGridActivity" />
         <activity android:name=".RegisterUserActivity" />

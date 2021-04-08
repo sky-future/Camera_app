@@ -15,7 +15,6 @@ public class User {
         this.email = email;
     }
 
-
     public User(){
         ArrayList<Camera> cameras = new ArrayList<Camera>();
     }
@@ -70,7 +69,13 @@ public class User {
         this.email = email;
     }
 
+    public List<Camera> getCameras() {
+        return cameras;
+    }
 
+    public void setCameras(List<Camera> cameras) {
+        this.cameras = cameras;
+    }
 
 
 }
