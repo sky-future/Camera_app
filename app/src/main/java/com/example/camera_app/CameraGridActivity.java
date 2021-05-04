@@ -174,15 +174,21 @@ public class CameraGridActivity extends AppCompatActivity implements NavigationV
         }
         else{
             super.onBackPressed();
+            streamView.stopStream();
+            FirebaseAuth.getInstance().signOut();
+            startActivity(new Intent(CameraGridActivity.this, MainActivity.class));
+
         }
     }
+
+
     /*---------------- Menu Selection organiser--------------------*/
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()){
             case R.id.nav_home:
                 streamView.stopStream();
-                startActivity(new Intent(CameraGridActivity.this, MainActivity.class));
+                startActivity(new Intent(CameraGridActivity.this, CameraGridActivity.class));
                 break;
             case R.id.nav_logout:
                 streamView.stopStream();

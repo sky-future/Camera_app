@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -36,6 +37,7 @@ public class CameraViewActivity extends AppCompatActivity {
     private String userId;
     List<Camera> cameras ;
     Camera cam;
+    String ipCam;
 
 
     @Override
@@ -48,7 +50,7 @@ public class CameraViewActivity extends AppCompatActivity {
         userId = user.getUid();
 
         Intent intent = getIntent();
-        String ipCam = intent.getStringExtra("ipCam");
+        ipCam = intent.getStringExtra("ipCam");
         Toast.makeText(CameraViewActivity.this, ipCam, Toast.LENGTH_SHORT).show();
 
 
@@ -67,38 +69,27 @@ public class CameraViewActivity extends AppCompatActivity {
                                 cam = snapshot1.getValue(Camera.class);
                                 cameras.add(cam);
                                 Toast.makeText(CameraViewActivity.this, String.valueOf(cam.isGpio15()), Toast.LENGTH_SHORT).show();
-                                if(cam.isGpio15()){
 
-                                    Toast.makeText(CameraViewActivity.this, String.valueOf(cam.isGpio12()), Toast.LENGTH_SHORT).show();
-
-                                    Button myButton = new Button(CameraViewActivity.this);
-                                    myButton.setText(cam.getGpio15Name());
-
-                                    //TODO finaliser le code pour les boutons
-
-                                    myButton.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
-                                            String ipOn = "http://" + ipCam;
-                                            AsyncHttpClient client = new AsyncHttpClient();
-                                            client.get(ipOn + "/on", new AsyncHttpResponseHandler() {
-                                                @Override
-                                                public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                                                    Toast.makeText(CameraViewActivity.this, "On / 200 ok", Toast.LENGTH_LONG).show();
-                                                }
-
-                                                @Override
-                                                public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                                                    Toast.makeText(CameraViewActivity.this, "Erreur 404", Toast.LENGTH_LONG).show();
-                                                }
-                                            });
-                                        }
-                                    });
-
-                                    LinearLayout layout = findViewById(R.id.testStream);
-                                    LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                                    layout.addView(myButton, layoutParams);
+                                if(cam.isGpio12()){
+                                    GenerateButtons(cam.getGpio12Name(), "gpio12");
                                 }
+
+                                if(cam.isGpio13()){
+                                    GenerateButtons(cam.getGpio13Name(), "gpio13");
+                                }
+
+                                if(cam.isGpio14()){
+                                    GenerateButtons(cam.getGpio14Name(), "gpio14");
+                                }
+
+                                if(cam.isGpio15()){
+                                    GenerateButtons(cam.getGpio15Name(), "gpio15");
+                                }
+
+                                if(cam.isGpio16()){
+                                    GenerateButtons(cam.getGpio15Name(), "gpio16");
+                                }
+
                             }
                         }
                     }
@@ -119,6 +110,61 @@ public class CameraViewActivity extends AppCompatActivity {
         startActivity(new Intent(CameraViewActivity.this, CameraGridActivity.class));
     }
 
+    public void GenerateButtons(String buttonName, String DomainName){
 
+        Button myButtonOn = new Button(CameraViewActivity.this);
+
+        myButtonOn.setText(buttonName + "On");
+
+                                    //TODO finaliser le code pour les boutons
+
+        myButtonOn.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            String ipOn = "http://" + ipCam;
+                                            AsyncHttpClient client = new AsyncHttpClient();
+                                            client.get(ipOn + "/" + DomainName + "/on", new AsyncHttpResponseHandler() {
+                                                @Override
+                                                public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                                                    Toast.makeText(CameraViewActivity.this, "On / 200 ok", Toast.LENGTH_LONG).show();
+                                                }
+
+                                                @Override
+                                                public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                                                    Toast.makeText(CameraViewActivity.this, "Erreur 404", Toast.LENGTH_LONG).show();
+                                                }
+                                            });
+                                        }
+                                    });
+
+        Button myButtonOff = new Button(CameraViewActivity.this);
+        myButtonOff.setText(buttonName + "Off");
+
+        myButtonOff.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String ipOn = "http://" + ipCam;
+                AsyncHttpClient client = new AsyncHttpClient();
+                client.get(ipOn + "/" + DomainName + "/off", new AsyncHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                        Toast.makeText(CameraViewActivity.this, "On / 200 ok", Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                        Toast.makeText(CameraViewActivity.this, "Erreur 404", Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
+        });
+
+        LinearLayout layout = findViewById(R.id.testStream);
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        layout.addView(myButtonOn, layoutParams);
+        layout.addView(myButtonOff, layoutParams);
+
+
+    }
 
 }
