@@ -24,8 +24,27 @@
         android:textSize="24sp"
         android:textStyle="bold"
         />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center">
 
-    <com.longdo.mjpegviewer.MjpegView
+        <Button
+            android:id="@+id/buttonModify"
+            android:layout_width="134dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:text="Modifier Camera" />
+
+        <Button
+            android:id="@+id/buttonDelete"
+            android:layout_width="133dp"
+            android:layout_height="wrap_content"
+            android:text="supprimer Camera" />
+
+    </LinearLayout>
+        <com.longdo.mjpegviewer.MjpegView
         android:id="@+id/mjpegView1"
         android:layout_width="398dp"
         android:layout_height="350dp"
@@ -43,6 +62,6 @@
         android:textStyle="bold"
          />
 
-        </LinearLayout>
+    </LinearLayout>
 
 </ScrollView>

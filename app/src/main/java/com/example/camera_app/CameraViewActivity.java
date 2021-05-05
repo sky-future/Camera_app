@@ -29,7 +29,7 @@ import java.util.List;
 import cz.msebera.android.httpclient.Header;
 import model.Camera;
 
-public class CameraViewActivity extends AppCompatActivity {
+public class CameraViewActivity extends AppCompatActivity implements View.OnClickListener{
 
     private MjpegView streamCamera;
     private FirebaseUser user;
@@ -53,6 +53,11 @@ public class CameraViewActivity extends AppCompatActivity {
         ipCam = intent.getStringExtra("ipCam");
         Toast.makeText(CameraViewActivity.this, ipCam, Toast.LENGTH_SHORT).show();
 
+        Button modifyButton = findViewById(R.id.buttonModify);
+        Button deleteButton = findViewById(R.id.buttonDelete);
+
+        modifyButton.setOnClickListener(this);
+        deleteButton.setOnClickListener(this);
 
         streamCamera = findViewById(R.id.mjpegView1);
         streamCamera.setUrl("http://"+ ipCam + "/stream");
@@ -103,12 +108,38 @@ public class CameraViewActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onClick(View v) {
+        //switch pour déterminer quel élément a été cliqué
+        switch(v.getId()){
+
+            case R.id.buttonModify:
+                    streamCamera.stopStream();
+                Toast.makeText(CameraViewActivity.this, "Modify", Toast.LENGTH_LONG).show();
+                break;
+            case R.id.buttonDelete:
+                    streamCamera.stopStream();
+                Toast.makeText(CameraViewActivity.this, "Delete", Toast.LENGTH_LONG).show();
+                    deleteCamera(ipCam);
+
+
+                break;
+        }
+
+    }
+
+    private void deleteCamera(String ipCam) {
+
+
+    }
+
+    @Override
     public void onBackPressed() {
         super.onBackPressed();
 
         streamCamera.stopStream();
         startActivity(new Intent(CameraViewActivity.this, CameraGridActivity.class));
     }
+
 
     public void GenerateButtons(String buttonName, String DomainName){
 

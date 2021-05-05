@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--    Un seul élément peut être sélectionné à la fois-->
+
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/home_icon"
+        android:title="Home" />
+
+    <item android:title=" Editer Camera">
+
+        <menu>
+
+    <group android:checkableBehavior="single">
+
+
+        <item
+            android:id="@+id/nav_delete"
+            android:icon="@drawable/ic_add"
+            android:title="Supprimer Camera"
+            />
+        <item
+            android:id="@+id/nav_modify"
+            android:icon="@drawable/ic_settings"
+            android:title="Modifier Camera"
+            />
+    </group>
+
+        </menu>
+
+    </item>
+
+</menu>
