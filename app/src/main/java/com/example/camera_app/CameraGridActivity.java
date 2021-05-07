@@ -103,13 +103,13 @@ public class CameraGridActivity extends AppCompatActivity implements NavigationV
                         {
                             int i = 0;
                             countCameras = (int) snapshot.getChildrenCount();
-                            Toast.makeText(CameraGridActivity.this, String.valueOf(countCameras), Toast.LENGTH_SHORT).show();
+
 
                             cameras = new ArrayList<>();
                             for(DataSnapshot snapshot1 : snapshot.getChildren()){
 
                                 Camera cam = snapshot1.getValue(Camera.class);
-                                Toast.makeText(CameraGridActivity.this, cam.getIpCamera(), Toast.LENGTH_SHORT).show();
+
                                 cameras.add(cam);
 
                                 streamView = new MjpegView(CameraGridActivity.this);
@@ -194,7 +194,7 @@ public class CameraGridActivity extends AppCompatActivity implements NavigationV
                 streamView.stopStream();
                 FirebaseAuth.getInstance().signOut();
                 startActivity(new Intent(CameraGridActivity.this, MainActivity.class));
-                Toast.makeText(CameraGridActivity.this, "Logout succesfull", Toast.LENGTH_LONG).show();
+                Toast.makeText(CameraGridActivity.this, "Logout succesfull", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_add:
                 if(cameras != null){

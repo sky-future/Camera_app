@@ -114,11 +114,14 @@ public class CameraViewActivity extends AppCompatActivity implements View.OnClic
 
             case R.id.buttonModify:
                     streamCamera.stopStream();
-                Toast.makeText(CameraViewActivity.this, "Modify", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(CameraViewActivity.this, activity_Edit_Camera.class);
+                intent.putExtra("ipCam", cam.getIpCamera());
+                startActivity(intent);
+
                 break;
             case R.id.buttonDelete:
                     streamCamera.stopStream();
-                Toast.makeText(CameraViewActivity.this, "Delete", Toast.LENGTH_LONG).show();
+
                     deleteCamera(ipCam);
 
 

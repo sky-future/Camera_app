@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Camera_app"
         android:usesCleartextTraffic="true">
-        <activity android:name=".CameraDetectedPictures"></activity>
+        <activity android:name=".activity_Edit_Camera"></activity>
+        <activity android:name=".CameraDetectedPictures" />
         <activity android:name=".CameraViewActivity" />
         <activity android:name=".testCamera" />
         <activity android:name=".activity_user_profile" />
