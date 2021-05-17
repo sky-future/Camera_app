@@ -36,7 +36,7 @@ public class CameraViewActivity extends AppCompatActivity implements View.OnClic
     private DatabaseReference reference;
     private String userId;
     List<Camera> cameras ;
-    Camera cam;
+    String cameraIp;
     String ipCam;
 
 
@@ -51,7 +51,7 @@ public class CameraViewActivity extends AppCompatActivity implements View.OnClic
 
         Intent intent = getIntent();
         ipCam = intent.getStringExtra("ipCam");
-        Toast.makeText(CameraViewActivity.this, ipCam, Toast.LENGTH_SHORT).show();
+
 
         Button modifyButton = findViewById(R.id.buttonModify);
         Button deleteButton = findViewById(R.id.buttonDelete);
@@ -68,34 +68,44 @@ public class CameraViewActivity extends AppCompatActivity implements View.OnClic
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
+
                         if(snapshot.exists()){
                             cameras = new ArrayList<>();
                             for(DataSnapshot snapshot1 : snapshot.getChildren()){
-                                cam = snapshot1.getValue(Camera.class);
+
+                                Camera cam = snapshot1.getValue(Camera.class);
                                 cameras.add(cam);
-                                Toast.makeText(CameraViewActivity.this, String.valueOf(cam.isGpio15()), Toast.LENGTH_SHORT).show();
-
-                                if(cam.isGpio12()){
-                                    GenerateButtons(cam.getGpio12Name(), "gpio12");
-                                }
-
-                                if(cam.isGpio13()){
-                                    GenerateButtons(cam.getGpio13Name(), "gpio13");
-                                }
-
-                                if(cam.isGpio14()){
-                                    GenerateButtons(cam.getGpio14Name(), "gpio14");
-                                }
-
-                                if(cam.isGpio15()){
-                                    GenerateButtons(cam.getGpio15Name(), "gpio15");
-                                }
-
-                                if(cam.isGpio16()){
-                                    GenerateButtons(cam.getGpio15Name(), "gpio16");
-                                }
 
                             }
+
+                            for(Camera cam : cameras){
+
+                                if(cam.getIpCamera().equals(ipCam)){
+
+                                    cameraIp = cam.getIpCamera();
+
+                                    if(cam.isGpio12()){
+                                        GenerateButtons(cam.getGpio12Name(), "gpio12");
+                                    }
+
+                                    if(cam.isGpio13()){
+                                        GenerateButtons(cam.getGpio13Name(), "gpio13");
+                                    }
+
+                                    if(cam.isGpio14()){
+                                        GenerateButtons(cam.getGpio14Name(), "gpio14");
+                                    }
+
+                                    if(cam.isGpio15()){
+                                        GenerateButtons(cam.getGpio15Name(), "gpio15");
+                                    }
+
+                                    if(cam.isGpio16()){
+                                        GenerateButtons(cam.getGpio15Name(), "gpio16");
+                                    }
+                                }
+                            }
+
                         }
                     }
 
@@ -115,7 +125,7 @@ public class CameraViewActivity extends AppCompatActivity implements View.OnClic
             case R.id.buttonModify:
                     streamCamera.stopStream();
                 Intent intent = new Intent(CameraViewActivity.this, activity_Edit_Camera.class);
-                intent.putExtra("ipCam", cam.getIpCamera());
+                intent.putExtra("ipCam", cameraIp);
                 startActivity(intent);
 
                 break;

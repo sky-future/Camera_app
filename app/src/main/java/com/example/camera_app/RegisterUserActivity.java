@@ -122,9 +122,10 @@ public class RegisterUserActivity extends AppCompatActivity implements View.OnCl
         }
 
         progressBarRegister.setVisibility(View.VISIBLE);
+
+
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
@@ -141,8 +142,6 @@ public class RegisterUserActivity extends AppCompatActivity implements View.OnCl
                                     if (task.isSuccessful()) {
                                         Toast.makeText(RegisterUserActivity.this, "l'Utilisateur a été crée avec succès !", Toast.LENGTH_LONG).show();
                                         progressBarRegister.setVisibility(View.GONE);
-                                        //TODO ajouter une redirection vers le login
-                                        //Redirige vers la fenêtre de login
                                     } else {
                                         Toast.makeText(RegisterUserActivity.this, "l'utilisateur n'a pas été ajouté, veuillez réessayer", Toast.LENGTH_LONG).show();
                                         progressBarRegister.setVisibility(View.GONE);
@@ -152,15 +151,8 @@ public class RegisterUserActivity extends AppCompatActivity implements View.OnCl
                         } else {
                             Toast.makeText(RegisterUserActivity.this, "l'utilisateur n'a pas été ajouté, veuillez réessayer", Toast.LENGTH_LONG).show();
                             progressBarRegister.setVisibility(View.GONE);
-
                         }
                     }
                 });
-
-
-
-
     }
-
-
 }

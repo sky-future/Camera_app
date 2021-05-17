@@ -18,6 +18,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Objects;
+
 import model.User;
 
 public class activity_user_profile extends AppCompatActivity {
@@ -34,7 +36,9 @@ public class activity_user_profile extends AppCompatActivity {
         setContentView(R.layout.activity_user_profile);
 
         user = FirebaseAuth.getInstance().getCurrentUser();
-        reference = FirebaseDatabase.getInstance("https://authentification-app-camera-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Users");
+        reference = FirebaseDatabase
+                .getInstance("https://authentification-app-camera-default-rtdb.europe-west1.firebasedatabase.app/")
+                .getReference("Users");
         userID = user.getUid();
 
         firstNameTextInput = findViewById(R.id.firstName);
@@ -60,7 +64,8 @@ public class activity_user_profile extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(activity_user_profile.this, "quelque chose ne s'est pas passé comme prévu", Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity_user_profile.this,
+                        "quelque chose ne s'est pas passé comme prévu", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -69,7 +74,9 @@ public class activity_user_profile extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 update();
-                Toast.makeText(activity_user_profile.this, "Le profil a été mit à jour !", Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity_user_profile.this,
+                        "Le profil a été mit à jour !", Toast.LENGTH_SHORT).show();
+
                 startActivity(new Intent(activity_user_profile.this, CameraGridActivity.class));
             }
         });
@@ -82,16 +89,18 @@ public class activity_user_profile extends AppCompatActivity {
 
     public void update(){
 
-        if(!firstName.equals(firstNameTextInput.getEditText().getText().toString()) || !lastName.equals(lastNameTextInput.getEditText().getText().toString()) || !email.equals(emailTextInput.getEditText().getText().toString())){
+        if(!firstName.equals(Objects.requireNonNull(firstNameTextInput.getEditText()).getText().toString()) ||
+                !lastName.equals(Objects.requireNonNull(lastNameTextInput.getEditText()).getText().toString()) ||
+                !email.equals(Objects.requireNonNull(emailTextInput.getEditText()).getText().toString())){
 
-            reference.child(userID).child("firstName").setValue(firstNameTextInput.getEditText().getText().toString());
-            reference.child(userID).child("lastName").setValue(lastNameTextInput.getEditText().getText().toString());
-            reference.child(userID).child("email").setValue(emailTextInput.getEditText().getText().toString());
-            return;
-        }else{
-            return;
+            reference.child(userID).child("firstName")
+                    .setValue(firstNameTextInput.getEditText().getText().toString());
+            reference.child(userID).child("lastName")
+                    .setValue(Objects.requireNonNull(lastNameTextInput.getEditText()).getText().toString());
+            reference.child(userID).child("email")
+                    .setValue(Objects.requireNonNull(emailTextInput.getEditText()).getText().toString());
+
         }
-
 
     }
 

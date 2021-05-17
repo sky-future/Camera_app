@@ -53,8 +53,6 @@ public class CameraGridActivity extends AppCompatActivity implements NavigationV
 
     List<Camera> cameras;
 
-    private String location = "http://10.104.210.29";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,8 +68,6 @@ public class CameraGridActivity extends AppCompatActivity implements NavigationV
         testCam = findViewById(R.id.testCamera); //test camera stream
         toolbar = findViewById(R.id.toolbar);
         loggedInUser = findViewById(R.id.welkomText);
-//        loggedInUser.setText(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
-
 
         /*---------------- Toolbar--------------------*/
 
@@ -103,7 +99,6 @@ public class CameraGridActivity extends AppCompatActivity implements NavigationV
                         {
                             int i = 0;
                             countCameras = (int) snapshot.getChildrenCount();
-
 
                             cameras = new ArrayList<>();
                             for(DataSnapshot snapshot1 : snapshot.getChildren()){
@@ -146,23 +141,6 @@ public class CameraGridActivity extends AppCompatActivity implements NavigationV
                     }
                 });
 
-//       reference.child(userID)
-//               .child("Cameras").addListenerForSingleValueEvent(new ValueEventListener() {
-//           @Override
-//           public void onDataChange(@NonNull DataSnapshot snapshot) {
-//               User userProfile = snapshot.getValue(User.class);
-//
-//               if(userProfile != null){
-//                  String ip = userProfile.getCameras().get(0).ipCamera;
-//                   Toast.makeText(CameraGridActivity.this, ip, Toast.LENGTH_SHORT).show();
-//               }
-//           }
-//
-//           @Override
-//           public void onCancelled(@NonNull DatabaseError error) {
-//               Toast.makeText(CameraGridActivity.this, "quelque chose ne s'est pas passé comme prévu", Toast.LENGTH_SHORT).show();
-//           }
-//       });
 
     }
 
@@ -217,80 +195,4 @@ public class CameraGridActivity extends AppCompatActivity implements NavigationV
 }
 
 
-//        onButton = (Button)findViewById(R.id.onButton);
-//        onButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                //Utilise une requete asynchrone afin de ne pas faire la requete dans le mainthread.
-//                AsyncHttpClient client = new AsyncHttpClient();
-//                client.get(location+"/on", new AsyncHttpResponseHandler() {
-//                    @Override
-//                    public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-//                        Toast.makeText(CameraGridActivity.this, "On / 200 ok", Toast.LENGTH_LONG).show();
-//                    }
-//
-//                    @Override
-//                    public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-//                        Toast.makeText(CameraGridActivity.this, "Erreur 404", Toast.LENGTH_LONG).show();
-//                    }
-//                });
-//
-//            }
-//        });
-//
-//        offButton = (Button)findViewById(R.id.offButton);
-//        offButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                AsyncHttpClient client = new AsyncHttpClient();
-//                client.get(location+"/off", new AsyncHttpResponseHandler() {
-//                    @Override
-//                    public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-//                        Toast.makeText(CameraGridActivity.this, "Off / 200 ok", Toast.LENGTH_LONG).show();
-//                    }
-//
-//                    @Override
-//                    public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-//                        Toast.makeText(CameraGridActivity.this, "Erreur 404", Toast.LENGTH_LONG).show();
-//                    }
-//                });
-//
-//            }
-//        });
-
-        //mjpegView1 = (MjpegView) findViewById(R.id.mjpegView1);
-        //DrawerLayout drawerLayout = findViewById(R.id.cameraLayout);
-
-
-//        //testCamera = (ImageView) findViewById(R.id.testCamera);
-//        mjpegView1 = (MjpegView) findViewById(R.id.mjpegView1);
-//
-//       // testCamera.setVisibility(View.GONE);
-//        mjpegView1.setVisibility(View.VISIBLE);
-//        mjpegView1.setMode(mjpegView1.MODE_FIT_WIDTH);
-//        mjpegView1.setAdjustHeight(true);
-//        mjpegView1.setUrl(url);
-//        mjpegView1.startStream();
-
-
-//
-
-
-
-
-//    public static int doHttpGetRequest(String url) {
-//        try {
-//            HttpURLConnection conn = (HttpURLConnection) (new URL(url))
-//                    .openConnection();
-//            conn.setUseCaches(false);
-//            conn.connect();
-//            int status = conn.getResponseCode();
-//            conn.disconnect();
-//            return status;
-//        } catch (Exception e) {
-//            Log.e("doHttpGetRequest", e.toString());
-//        }
-//        return 0;
-//    }
 

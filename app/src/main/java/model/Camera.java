@@ -8,7 +8,9 @@ public class Camera {
     public boolean gpio12, gpio13, gpio14, gpio15, gpio16;
     public String gpio12Name, gpio13Name, gpio14Name, gpio15Name, gpio16Name;
 
-    public Camera( String ipCamera, boolean gpio12, boolean gpio13, boolean gpio14, boolean gpio15, boolean gpio16, String gpio12Name, String gpio13Name, String gpio14Name, String gpio15Name, String gpio16Name) {
+
+
+    public Camera(String ipCamera, boolean gpio12, boolean gpio13, boolean gpio14, boolean gpio15, boolean gpio16, String gpio12Name, String gpio13Name, String gpio14Name, String gpio15Name, String gpio16Name) {
         this.ipCamera = ipCamera;
         this.gpio12 = gpio12;
         this.gpio13 = gpio13;
@@ -131,5 +133,13 @@ public class Camera {
 
     public String getGpio15Name() {
         return gpio15Name;
+    }
+
+    public String getGpio16Name() {
+        return gpio16Name;
+    }
+
+    public void setGpio16Name(String gpio16Name) {
+        this.gpio16Name = gpio16Name;
     }
 }

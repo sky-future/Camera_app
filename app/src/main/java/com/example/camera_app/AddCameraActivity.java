@@ -70,7 +70,6 @@ public class AddCameraActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_camera);
 
         ipCamera = findViewById(R.id.addCameraIp);
-        //ipCamera.setText("192.168.1.5");
 
         switchGpio12 = findViewById(R.id.switch_addButtons);
         switchGpio13 = findViewById(R.id.switch_addButtons2);
@@ -160,7 +159,6 @@ public class AddCameraActivity extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-
                         if(snapshot.exists())
                         {
                             countCameras = (int) snapshot.getChildrenCount();
@@ -229,7 +227,7 @@ public class AddCameraActivity extends AppCompatActivity {
             return;
         }
 
-        //TODO problème avec l'ajout de plusieurs caméras en suivant.
+
         Camera cam = new Camera(ipCam,gpio12, gpio13, gpio14, gpio15, gpio16, gpio12Name, gpio13Name, gpio14Name, gpio15Name, gpio16Name);
 
                 reference.child(userID)

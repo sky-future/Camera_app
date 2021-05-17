@@ -39,7 +39,7 @@ public class activity_Edit_Camera extends AppCompatActivity {
     private List<Camera> cameras;
 
     private String ipCam;
-    private Camera cam;
+    //private Camera cam;
 
     private EditText nameGpio12;
     private EditText nameGpio13;
@@ -80,6 +80,10 @@ public class activity_Edit_Camera extends AppCompatActivity {
         switchGpio16 = findViewById(R.id.switch_addButtons5);
 
         gpio12Name = findViewById(R.id.gpio12Name);
+        gpio13Name = findViewById(R.id.gpio13Name);
+        gpio14Name = findViewById(R.id.gpio14Name);
+        gpio15Name = findViewById(R.id.gpio15Name);
+        gpio16Name = findViewById(R.id.gpio16Name);
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         reference = FirebaseDatabase.getInstance("https://authentification-app-camera-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Users");
@@ -93,45 +97,52 @@ public class activity_Edit_Camera extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 //Camera camera = snapshot.getValue(Camera.class);
+
                 if(snapshot.exists()){
                     cameras = new ArrayList<>();
-                    for(DataSnapshot snapshot1 : snapshot.getChildren()){
+                    for(DataSnapshot snapshot1 : snapshot.getChildren()) {
 
                         Camera cam = snapshot1.getValue(Camera.class);
                         cameras.add(cam);
+                    }
+
+                    for(Camera cam : cameras){
+
                         if(cam.getIpCamera().equals(ipCam)){
-                            ipCam = cam.getIpCamera();
 
                             ipCamera.getEditText().setText(ipCam);
 
+                            Toast.makeText(activity_Edit_Camera.this, "Ip ok", Toast.LENGTH_SHORT).show();
 
                             if(cam.isGpio12()){
+                            switchGpio12.setChecked(true);
+                            gpio12Name.getEditText().setText(cam.getGpio12Name());
 
                             }
                             if(cam.isGpio13()){
-
+                                switchGpio13.setChecked(true);
+                                gpio13Name.getEditText().setText(cam.getGpio13Name());
                             }
                             if(cam.isGpio14()){
-
+                                switchGpio14.setChecked(true);
+                                gpio14Name.getEditText().setText(cam.getGpio14Name());
                             }
                             if(cam.isGpio15()){
-
+                                switchGpio15.setChecked(true);
+                                gpio15Name.getEditText().setText(cam.getGpio15Name());
                             }
                             if(cam.isGpio16()){
-
+                                switchGpio16.setChecked(true);
+                                gpio16Name.getEditText().setText(cam.getGpio16Name());
                             }
                         }
                         else{
-                            return;
+                            continue;
                         }
+
                     }
                 }
 
-//                Camera CameratoEdit = snapshot.getValue(Camera.class);
-//
-//                if(CameratoEdit != null){
-//
-//                }
             }
 
             @Override

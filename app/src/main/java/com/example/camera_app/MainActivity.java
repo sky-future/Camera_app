@@ -117,11 +117,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     }else{
                         user.sendEmailVerification();
-                        Toast.makeText(MainActivity.this, "Verrifiez votre boite mail, pour vérifier votre compte", Toast.LENGTH_LONG).show();
+                        Toast.makeText(MainActivity.this,
+                                "Verrifiez votre boite mail, pour vérifier votre compte", Toast.LENGTH_LONG).show();
                     }
 
                 }else{
-                    Toast.makeText(MainActivity.this, "Veuillez vérifier vos informations de connexions", Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivity.this,
+                            "Veuillez vérifier vos informations de connexions", Toast.LENGTH_LONG).show();
                 }
             }
         });
