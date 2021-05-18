@@ -104,9 +104,7 @@ public class CameraGridActivity extends AppCompatActivity implements NavigationV
                             for(DataSnapshot snapshot1 : snapshot.getChildren()){
 
                                 Camera cam = snapshot1.getValue(Camera.class);
-
                                 cameras.add(cam);
-
                                 streamView = new MjpegView(CameraGridActivity.this);
                                 streamView.setId(i++);
                                 testCam.addView(streamView);
@@ -120,11 +118,10 @@ public class CameraGridActivity extends AppCompatActivity implements NavigationV
                                     @Override
                                     public void onClick(View v) {
                                         streamView.stopStream();
-                                        Intent intent = new Intent(CameraGridActivity.this, CameraViewActivity.class);
+                                        Intent intent = new Intent(CameraGridActivity.this,
+                                                CameraViewActivity.class);
                                         intent.putExtra("ipCam", cam.getIpCamera());
-
                                         startActivity(intent);
-
                                     }
                                 });
                             }

@@ -96,7 +96,7 @@ public class activity_Edit_Camera extends AppCompatActivity {
                 addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                //Camera camera = snapshot.getValue(Camera.class);
+
 
                 if(snapshot.exists()){
                     cameras = new ArrayList<>();
@@ -105,15 +105,11 @@ public class activity_Edit_Camera extends AppCompatActivity {
                         Camera cam = snapshot1.getValue(Camera.class);
                         cameras.add(cam);
                     }
-
                     for(Camera cam : cameras){
-
                         if(cam.getIpCamera().equals(ipCam)){
-
                             ipCamera.getEditText().setText(ipCam);
-
-                            Toast.makeText(activity_Edit_Camera.this, "Ip ok", Toast.LENGTH_SHORT).show();
-
+                            Toast.makeText(activity_Edit_Camera.this,
+                                    "Ip ok", Toast.LENGTH_SHORT).show();
                             if(cam.isGpio12()){
                             switchGpio12.setChecked(true);
                             gpio12Name.getEditText().setText(cam.getGpio12Name());

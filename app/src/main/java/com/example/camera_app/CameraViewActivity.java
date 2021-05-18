@@ -29,13 +29,13 @@ import java.util.List;
 import cz.msebera.android.httpclient.Header;
 import model.Camera;
 
-public class CameraViewActivity extends AppCompatActivity implements View.OnClickListener{
+public class CameraViewActivity extends AppCompatActivity implements View.OnClickListener {
 
     private MjpegView streamCamera;
     private FirebaseUser user;
     private DatabaseReference reference;
     private String userId;
-    List<Camera> cameras ;
+    List<Camera> cameras;
     String cameraIp;
     String ipCam;
 
@@ -49,18 +49,16 @@ public class CameraViewActivity extends AppCompatActivity implements View.OnClic
         reference = FirebaseDatabase.getInstance("https://authentification-app-camera-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Users");
         userId = user.getUid();
 
-        Intent intent = getIntent();
-        ipCam = intent.getStringExtra("ipCam");
-
-
         Button modifyButton = findViewById(R.id.buttonModify);
         Button deleteButton = findViewById(R.id.buttonDelete);
 
         modifyButton.setOnClickListener(this);
         deleteButton.setOnClickListener(this);
 
+        Intent intent = getIntent();
+        ipCam = intent.getStringExtra("ipCam");
         streamCamera = findViewById(R.id.mjpegView1);
-        streamCamera.setUrl("http://"+ ipCam + "/stream");
+        streamCamera.setUrl("http://" + ipCam + "/stream");
         streamCamera.startStream();
 
         reference.child(userId)
@@ -69,70 +67,57 @@ public class CameraViewActivity extends AppCompatActivity implements View.OnClic
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                        if(snapshot.exists()){
+                        if (snapshot.exists()) {
                             cameras = new ArrayList<>();
-                            for(DataSnapshot snapshot1 : snapshot.getChildren()){
-
+                            for (DataSnapshot snapshot1 : snapshot.getChildren()) {
                                 Camera cam = snapshot1.getValue(Camera.class);
                                 cameras.add(cam);
-
                             }
-
-                            for(Camera cam : cameras){
-
-                                if(cam.getIpCamera().equals(ipCam)){
-
+                            for (Camera cam : cameras) {
+                                if (cam.getIpCamera().equals(ipCam)) {
                                     cameraIp = cam.getIpCamera();
-
-                                    if(cam.isGpio12()){
+                                    if (cam.isGpio12()) {
                                         GenerateButtons(cam.getGpio12Name(), "gpio12");
                                     }
-
-                                    if(cam.isGpio13()){
+                                    if (cam.isGpio13()) {
                                         GenerateButtons(cam.getGpio13Name(), "gpio13");
                                     }
-
-                                    if(cam.isGpio14()){
+                                    if (cam.isGpio14()) {
                                         GenerateButtons(cam.getGpio14Name(), "gpio14");
                                     }
-
-                                    if(cam.isGpio15()){
+                                    if (cam.isGpio15()) {
                                         GenerateButtons(cam.getGpio15Name(), "gpio15");
                                     }
-
-                                    if(cam.isGpio16()){
+                                    if (cam.isGpio16()) {
                                         GenerateButtons(cam.getGpio15Name(), "gpio16");
                                     }
                                 }
                             }
-
                         }
                     }
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
-
                     }
                 });
-
     }
 
     @Override
     public void onClick(View v) {
         //switch pour déterminer quel élément a été cliqué
-        switch(v.getId()){
+        switch (v.getId()) {
 
             case R.id.buttonModify:
-                    streamCamera.stopStream();
+                streamCamera.stopStream();
                 Intent intent = new Intent(CameraViewActivity.this, activity_Edit_Camera.class);
                 intent.putExtra("ipCam", cameraIp);
                 startActivity(intent);
 
                 break;
             case R.id.buttonDelete:
-                    streamCamera.stopStream();
+                streamCamera.stopStream();
 
-                    deleteCamera(ipCam);
+                deleteCamera(ipCam);
 
 
                 break;
@@ -154,36 +139,29 @@ public class CameraViewActivity extends AppCompatActivity implements View.OnClic
     }
 
 
-    public void GenerateButtons(String buttonName, String DomainName){
-
+    public void GenerateButtons(String buttonName, String DomainName) {
         Button myButtonOn = new Button(CameraViewActivity.this);
-
         myButtonOn.setText(buttonName + "On");
-
-                                    //TODO finaliser le code pour les boutons
-
         myButtonOn.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
-                                            String ipOn = "http://" + ipCam;
-                                            AsyncHttpClient client = new AsyncHttpClient();
-                                            client.get(ipOn + "/" + DomainName + "/on", new AsyncHttpResponseHandler() {
-                                                @Override
-                                                public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                                                    Toast.makeText(CameraViewActivity.this, "On / 200 ok", Toast.LENGTH_LONG).show();
-                                                }
-
-                                                @Override
-                                                public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                                                    Toast.makeText(CameraViewActivity.this, "Erreur 404", Toast.LENGTH_LONG).show();
-                                                }
-                                            });
-                                        }
-                                    });
+            @Override
+            public void onClick(View v) {
+                String ipOn = "http://" + ipCam;
+                AsyncHttpClient client = new AsyncHttpClient();
+                client.get(ipOn + "/" + DomainName + "/on", new AsyncHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                        Toast.makeText(CameraViewActivity.this, "On / 200 ok", Toast.LENGTH_LONG).show();
+                    }
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                        Toast.makeText(CameraViewActivity.this, "Erreur 404", Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
+        });
 
         Button myButtonOff = new Button(CameraViewActivity.this);
         myButtonOff.setText(buttonName + "Off");
-
         myButtonOff.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -194,7 +172,6 @@ public class CameraViewActivity extends AppCompatActivity implements View.OnClic
                     public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                         Toast.makeText(CameraViewActivity.this, "On / 200 ok", Toast.LENGTH_LONG).show();
                     }
-
                     @Override
                     public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
                         Toast.makeText(CameraViewActivity.this, "Erreur 404", Toast.LENGTH_LONG).show();
@@ -202,13 +179,10 @@ public class CameraViewActivity extends AppCompatActivity implements View.OnClic
                 });
             }
         });
-
         LinearLayout layout = findViewById(R.id.testStream);
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.
+                LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         layout.addView(myButtonOn, layoutParams);
         layout.addView(myButtonOff, layoutParams);
-
-
     }
-
 }

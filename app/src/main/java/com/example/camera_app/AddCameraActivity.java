@@ -158,18 +158,17 @@ public class AddCameraActivity extends AppCompatActivity {
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-
                         if(snapshot.exists())
                         {
                             countCameras = (int) snapshot.getChildrenCount();
-                            Toast.makeText(AddCameraActivity.this, String.valueOf(countCameras), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AddCameraActivity.this,
+                                    String.valueOf(countCameras), Toast.LENGTH_SHORT).show();
                         }
                         else
                         {
                             countCameras = 0;
                         }
                     }
-
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
 
@@ -191,44 +190,40 @@ public class AddCameraActivity extends AppCompatActivity {
 
         Matcher matcher = IP_ADDRESS.matcher(ipCam);
 
-        if( matcher.matches() == false){
+        if(!matcher.matches()){
             ipCamera.setError("Veuillez entrer une adresse ip correcte !");
             ipCamera.requestFocus();
             return;
         }
-
-        if(switchGpio12.isChecked() == true && gpio12Name.matches("")){
+        if(switchGpio12.isChecked() && gpio12Name.matches("")){
             nameGpio12.setError("Veuillez entrez un nom ! ");
             nameGpio12.requestFocus();
             return;
         }
-
-        if(switchGpio13.isChecked() == true && gpio13Name.matches("")){
+        if(switchGpio13.isChecked() && gpio13Name.matches("")){
             nameGpio13.setError("Veuillez entrez un nom ! ");
             nameGpio13.requestFocus();
             return;
         }
-
-        if(switchGpio14.isChecked() == true && gpio14Name.matches("")){
+        if(switchGpio14.isChecked() && gpio14Name.matches("")){
             nameGpio14.setError("Veuillez entrez un nom ! ");
             nameGpio14.requestFocus();
             return;
         }
-
-        if(switchGpio15.isChecked() == true && gpio15Name.matches("")){
+        if(switchGpio15.isChecked() && gpio15Name.matches("")){
             nameGpio15.setError("Veuillez entrez un nom ! ");
             nameGpio15.requestFocus();
             return;
         }
-
-        if(switchGpio16.isChecked() == true && gpio16Name.matches("")){
+        if(switchGpio16.isChecked() && gpio16Name.matches("")){
             nameGpio16.setError("Veuillez entrez un nom ! ");
             nameGpio16.requestFocus();
             return;
         }
 
 
-        Camera cam = new Camera(ipCam,gpio12, gpio13, gpio14, gpio15, gpio16, gpio12Name, gpio13Name, gpio14Name, gpio15Name, gpio16Name);
+        Camera cam = new Camera(ipCam,gpio12, gpio13, gpio14, gpio15,
+                gpio16, gpio12Name, gpio13Name, gpio14Name, gpio15Name, gpio16Name);
 
                 reference.child(userID)
                         .child("Cameras")
@@ -239,7 +234,8 @@ public class AddCameraActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<Void> task) {
 
                 if(task.isSuccessful()){
-                    Toast.makeText(AddCameraActivity.this, "la camera a bien été ajouté", Toast.LENGTH_LONG).show();
+                    Toast.makeText(AddCameraActivity.this,
+                            "la camera a bien été ajouté", Toast.LENGTH_LONG).show();
 
 
                 }
